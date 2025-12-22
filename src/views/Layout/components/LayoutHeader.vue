@@ -2,8 +2,9 @@
 import { getCategoryApi } from '@/apis/Layout'
 import type { CategoryItem } from '@/types/category'
 
+// 全部分类
 const categoryList = ref<CategoryItem[]>([])
-
+// 获取全部分类
 const getCategoryList = async () => {
   const res = await getCategoryApi()
   categoryList.value = res.result
