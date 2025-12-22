@@ -1,17 +1,7 @@
 <script setup lang="ts">
-import { getCategoryApi } from '@/apis/Layout'
-import type { CategoryItem } from '@/types/category'
+import { useCategoryStore } from '@/stores/modules/category'
 
-// 全部分类
-const categoryList = ref<CategoryItem[]>([])
-// 获取全部分类
-const getCategoryList = async () => {
-  const res = await getCategoryApi()
-  categoryList.value = res.result
-}
-onMounted(() => {
-  getCategoryList()
-})
+const categoryStore = useCategoryStore()
 </script>
 
 <template>
@@ -23,7 +13,7 @@ onMounted(() => {
       <ul class="app-header-nav">
         <li
           class="home"
-          v-for="item in categoryList"
+          v-for="item in categoryStore.categoryList"
           :key="item.id"
         >
           <RouterLink to="/">{{ item.name }}</RouterLink>

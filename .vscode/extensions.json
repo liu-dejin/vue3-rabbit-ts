@@ -2,7 +2,8 @@
   "recommendations": [
     "Vue.volar",
     "dbaeumer.vscode-eslint",
-    "EditorConfig.EditorConfig",
-    "esbenp.prettier-vscode"
+    "usernamehw.errorlens",
+    "pranaygp.vscode-css-peek",
+    "formulahendry.auto-rename-tag"
   ]
 }
