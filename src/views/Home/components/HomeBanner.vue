@@ -1,7 +1,43 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { getHomeBannerApi } from '@/apis/home'
+import type { BannerItem } from '@/types/banner'
+
+const bannerList = ref<BannerItem[]>([])
+const getBannerList = async () => {
+  const res = await getHomeBannerApi()
+  bannerList.value = res.result
+}
+onMounted(() => getBannerList())
+</script>
 
 <template>
-  <div class="homebanner"></div>
+  <div class="home-banner">
+    <el-carousel height="500px">
+      <el-carousel-item
+        v-for="item in bannerList"
+        :key="item.id"
+      >
+        <img
+          :src="item.imgUrl"
+          alt=""
+        />
+      </el-carousel-item>
+    </el-carousel>
+  </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style scoped lang="scss">
+.home-banner {
+  width: 1240px;
+  height: 500px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 98;
+
+  img {
+    width: 100%;
+    height: 500px;
+  }
+}
+</style>

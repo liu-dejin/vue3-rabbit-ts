@@ -7,9 +7,7 @@ import { useCategoryStore } from '@/stores/modules/category'
 
 // 获取导航列表的action
 const categoryStore = useCategoryStore()
-onMounted(() => {
-  categoryStore.getCategoryList()
-})
+onMounted(() => categoryStore.getCategoryList())
 </script>
 
 <template>
