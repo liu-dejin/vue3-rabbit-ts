@@ -3,7 +3,6 @@ import type { NewItem } from '@/types/home'
 import HomePanel from './HomePanel.vue'
 import { findNewAPI } from '@/apis/home'
 
-// 获取新鲜好物数据
 const newList = ref<NewItem[]>([])
 
 const getNewList = async () => {
@@ -26,7 +25,7 @@ onMounted(() => getNewList())
       >
         <RouterLink to="/">
           <img
-            :src="item.picture"
+            v-img-lazy="item.picture"
             alt=""
           />
           <p class="name">{{ item.name }}</p>

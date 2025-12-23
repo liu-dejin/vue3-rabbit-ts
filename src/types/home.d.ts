@@ -24,3 +24,13 @@ export type NewItem = {
   /** 商品价格 */
   price: string
 }
+export type HotItem = {
+  /** 推荐别名 */
+  alt: string
+  /** 推荐id */
+  id: string
+  /** 推荐图片 */
+  picture: string
+  /** 推荐标题 */
+  title: string
+}
