@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { getHomeBannerApi } from '@/apis/home'
-import type { BannerItem } from '@/types/banner'
+import type { BannerItem } from '@/types/home'
 
 const bannerList = ref<BannerItem[]>([])
 const getBannerList = async () => {
