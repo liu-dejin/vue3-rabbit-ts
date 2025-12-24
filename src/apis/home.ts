@@ -1,4 +1,4 @@
-import type { BannerItem, HotItem, NewItem } from '@/types/home'
+import type { BannerItem, GoodsCategory, HotItem, NewItem } from '@/types/home'
 import { request } from '@/utils/request'
 
 /**
@@ -18,3 +18,8 @@ export const findNewAPI = (limit: string) => request<NewItem[]>('/home/new', 'GE
  * @returns 人气推荐列表
  */
 export const getHotAPI = () => request<HotItem[]>('home/hot')
+/**
+ * @description: 获取所有商品模块
+ * @returns 商品模块列表
+ */
+export const getGoodsAPI = () => request<GoodsCategory[]>('/home/goods')

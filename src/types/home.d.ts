@@ -34,3 +34,46 @@ export type HotItem = {
   /** 推荐标题 */
   title: string
 }
+/** 包含商品的分类对象 */
+export type GoodsCategory = {
+  /** 分类ID */
+  id: string;
+  /** 分类名称 */
+  name: string;
+  /** 分类图片 */
+  picture: string;
+  /** 促销信息 */
+  saleInfo: string;
+  /** 子级分类 */
+  children: CategoryChild[];
+  /** 商品列表 */
+  goods: GoodsItem[];
+}
+
+/** 子分类模型 */
+export type CategoryChild = {
+  /** 子分类ID */
+  id: string;
+  /** 子分类名称 */
+  name: string;
+  /** 层级 */
+  layer: number;
+  /** 父级节点 */
+  parent: null | any;
+}
+
+/** 核心商品模型 */
+export type GoodsItem = {
+  /** 商品唯一ID */
+  id: string;
+  /** 商品名称 */
+  name: string;
+  /** 商品详细描述 */
+  desc: string;
+  /** 商品价格（字符串格式） */
+  price: string;
+  /** 商品图片URL */
+  picture: string;
+  /** 销量/已订购数量 */
+  orderNum: number;
+}
