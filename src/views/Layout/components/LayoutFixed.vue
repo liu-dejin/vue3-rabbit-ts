@@ -23,7 +23,11 @@ const categoryStore = useCategoryStore()
         :key="item.id"
       >
         <li class="home">
-          <RouterLink :to="`/category/${item.id}`">{{ item.name }}</RouterLink>
+          <RouterLink
+            active-class="active"
+            :to="`/category/${item.id}`"
+            >{{ item.name }}</RouterLink
+          >
         </li>
       </ul>
 

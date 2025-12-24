@@ -3,6 +3,7 @@ import { getCategoryAPI } from '@/apis/category'
 import { getHomeBannerApi } from '@/apis/home'
 import type { Category } from '@/types/category'
 import type { BannerItem } from '@/types/home'
+import GoodsItem from '../Home/components/GoodsItem.vue'
 
 const route = useRoute()
 
@@ -38,19 +39,50 @@ onMounted(() => getBannerList())
         </el-breadcrumb>
       </div>
       <!-- 轮播图 -->
-    </div>
-    <div class="home-banner">
-      <el-carousel height="500px">
-        <el-carousel-item
-          v-for="item in bannerList"
-          :key="item.id"
-        >
-          <img
-            :src="item.imgUrl"
-            alt=""
+      <div class="home-banner">
+        <el-carousel height="500px">
+          <el-carousel-item
+            v-for="item in bannerList"
+            :key="item.id"
+          >
+            <img
+              :src="item.imgUrl"
+              alt=""
+            />
+          </el-carousel-item>
+        </el-carousel>
+      </div>
+      <!--  -->
+      <div class="sub-list">
+        <h3>全部分类</h3>
+        <ul>
+          <li
+            v-for="i in CategoryData?.children"
+            :key="i.id"
+          >
+            <RouterLink to="/">
+              <img :src="i.picture" />
+              <p>{{ i.name }}</p>
+            </RouterLink>
+          </li>
+        </ul>
+      </div>
+      <div
+        class="ref-goods"
+        v-for="item in CategoryData?.children"
+        :key="item.id"
+      >
+        <div class="head">
+          <h3>- {{ item.name }}-</h3>
+        </div>
+        <div class="body">
+          <GoodsItem
+            v-for="good in item.goods"
+            :goods="good"
+            :key="good.id"
           />
-        </el-carousel-item>
-      </el-carousel>
+        </div>
+      </div>
     </div>
   </div>
 </template>
