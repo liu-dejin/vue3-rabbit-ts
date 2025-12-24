@@ -3,9 +3,11 @@ import { request } from '@/utils/request'
 
 /**
  * 获取首页banner列表
+ * @param distributionSite -（投放位置 投放位置，1为首页，2为分类商品页） 默认是1
  * @returns banner列表
  */
-export const getHomeBannerApi = () => request<BannerItem[]>('/home/banner')
+export const getHomeBannerApi = (distributionSite: string = '1') =>
+  request<BannerItem[]>('/home/banner', 'GET', { distributionSite })
 
 /**
  * 获取新鲜好物

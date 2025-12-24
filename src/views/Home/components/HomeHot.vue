@@ -4,7 +4,7 @@ import { getHotAPI } from '@/apis/home'
 import type { HotItem } from '@/types/home'
 import { ref } from 'vue'
 
-const hotList = ref<HotItem[]>([])
+const hotList = ref<HotItem[]>()
 
 const getHotList = async () => {
   const res = await getHotAPI()

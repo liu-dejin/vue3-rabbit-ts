@@ -3,7 +3,7 @@ import type { NewItem } from '@/types/home'
 import HomePanel from './HomePanel.vue'
 import { findNewAPI } from '@/apis/home'
 
-const newList = ref<NewItem[]>([])
+const newList = ref<NewItem[]>()
 
 const getNewList = async () => {
   const res = await findNewAPI('4')

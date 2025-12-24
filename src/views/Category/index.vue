@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { getCategoryAPI } from '@/apis/category'
+import { getHomeBannerApi } from '@/apis/home'
 import type { Category } from '@/types/category'
+import type { BannerItem } from '@/types/home'
 
 const route = useRoute()
 
@@ -14,6 +16,15 @@ const getCategory = async () => {
 onMounted(() => getCategory())
 
 watch(route, () => getCategory())
+
+const bannerList = ref<BannerItem[]>()
+
+const getBannerList = async () => {
+  const res = await getHomeBannerApi('2')
+  bannerList.value = res.result
+}
+
+onMounted(() => getBannerList())
 </script>
 
 <template>
@@ -26,6 +37,20 @@ watch(route, () => getCategory())
           <el-breadcrumb-item>{{ CategoryData?.name }}</el-breadcrumb-item>
         </el-breadcrumb>
       </div>
+      <!-- 轮播图 -->
+    </div>
+    <div class="home-banner">
+      <el-carousel height="500px">
+        <el-carousel-item
+          v-for="item in bannerList"
+          :key="item.id"
+        >
+          <img
+            :src="item.imgUrl"
+            alt=""
+          />
+        </el-carousel-item>
+      </el-carousel>
     </div>
   </div>
 </template>
@@ -105,6 +130,16 @@ watch(route, () => getCategory())
 
   .bread-container {
     padding: 25px 0;
+  }
+  .home-banner {
+    width: 1240px;
+    height: 500px;
+    margin: 0 auto;
+
+    img {
+      width: 100%;
+      height: 500px;
+    }
   }
 }
 </style>

@@ -5,7 +5,7 @@ import type { BannerItem } from '@/types/home'
 const bannerList = ref<BannerItem[]>()
 
 const getBannerList = async () => {
-  const res = await getHomeBannerApi()
+  const res = await getHomeBannerApi('1')
   bannerList.value = res.result
 }
 
