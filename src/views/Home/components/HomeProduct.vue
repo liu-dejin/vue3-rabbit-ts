@@ -4,7 +4,7 @@ import HomePanel from './HomePanel.vue'
 import type { GoodsCategory } from '@/types/home'
 import GoodsItem from './GoodsItem.vue'
 
-const goodsProduct = ref<GoodsCategory[]>([])
+const goodsProduct = ref<GoodsCategory[]>()
 
 const getGoods = async () => {
   const res = await getGoodsAPI()

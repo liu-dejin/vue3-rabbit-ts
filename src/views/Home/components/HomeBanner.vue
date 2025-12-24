@@ -2,11 +2,13 @@
 import { getHomeBannerApi } from '@/apis/home'
 import type { BannerItem } from '@/types/home'
 
-const bannerList = ref<BannerItem[]>([])
+const bannerList = ref<BannerItem[]>()
+
 const getBannerList = async () => {
   const res = await getHomeBannerApi()
   bannerList.value = res.result
 }
+
 onMounted(() => getBannerList())
 </script>
 

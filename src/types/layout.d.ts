@@ -13,9 +13,9 @@ export type CategoryItem = {
 
 export type ChildItem = {
   /** 三级分类数组，三级分类数组(暂无) */
-  children: null
+  children?: ChildItem[]
   /** 二级级分类下属商品数组，二级分类商品数组(暂无) */
-  goods: null
+  goods?: GoodItem[]
   /** 二级分类id */
   id: string
   /** 二级分类名字 */
@@ -28,13 +28,13 @@ export type GoodItem = {
   /** 商品描述 */
   desc: string
   /** 商品折扣，如为null时，即无折扣 */
-  discount: null
+  discount?: string
   /** 商品id */
   id: string
   /** 商品名字 */
   name: string
   /** 商品销量 */
-  orderNum: null
+  orderNum?: string
   /** 商品图片 */
   picture: string
   /** 商品价格 */

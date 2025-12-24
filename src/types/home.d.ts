@@ -12,7 +12,7 @@ export type NewItem = {
   /** 商品描述 */
   desc: string
   /** 商品折扣 */
-  discount: null
+  discount?: string
   /** 商品id */
   id: string
   /** 商品名字 */
@@ -37,43 +37,43 @@ export type HotItem = {
 /** 包含商品的分类对象 */
 export type GoodsCategory = {
   /** 分类ID */
-  id: string;
+  id: string
   /** 分类名称 */
-  name: string;
+  name: string
   /** 分类图片 */
-  picture: string;
+  picture: string
   /** 促销信息 */
-  saleInfo: string;
+  saleInfo: string
   /** 子级分类 */
-  children: CategoryChild[];
+  children: CategoryChild[]
   /** 商品列表 */
-  goods: GoodsItem[];
+  goods: GoodsItem[]
 }
 
 /** 子分类模型 */
 export type CategoryChild = {
   /** 子分类ID */
-  id: string;
+  id: string
   /** 子分类名称 */
-  name: string;
+  name: string
   /** 层级 */
-  layer: number;
+  layer: number
   /** 父级节点 */
-  parent: null | any;
+  parent?: string
 }
 
 /** 核心商品模型 */
 export type GoodsItem = {
   /** 商品唯一ID */
-  id: string;
+  id: string
   /** 商品名称 */
-  name: string;
+  name: string
   /** 商品详细描述 */
-  desc: string;
+  desc: string
   /** 商品价格（字符串格式） */
-  price: string;
+  price: string
   /** 商品图片URL */
-  picture: string;
+  picture: string
   /** 销量/已订购数量 */
-  orderNum: number;
+  orderNum: number
 }
