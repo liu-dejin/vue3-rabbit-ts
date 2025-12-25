@@ -3,31 +3,48 @@ import { getCategoryFilterAPI, getSubCategoryAPI } from '@/apis/category'
 import type { CategoryFilterResult, Good, SubCategoryRequest } from '@/types/category'
 import GoodsItem from '../Home/components/GoodsItem.vue'
 
+// 获取分类数据
 const CategoryData = ref<CategoryFilterResult>()
 
 const route = useRoute()
-
 const getCategoryData = async (id: string) => {
   const res = await getCategoryFilterAPI(id)
   CategoryData.value = res.result
 }
 
 onMounted(() => getCategoryData(route.params.id as string))
-
+// 获取子分类数据(商品数据)
 const goodList = ref<Good[]>()
-const reqData = ref<SubCategoryRequest>()
-const getGoodList = async (id: string) => {
-  reqData.value = {
-    categoryId: id,
-    page: 1,
-    pageSize: 10,
-    sortField: 'publishTime'
-  }
+const reqData = ref<SubCategoryRequest>({
+  categoryId: route.params.id as string,
+  page: 1,
+  pageSize: 20,
+  sortField: 'publishTime'
+})
+const getGoodList = async () => {
   const res = await getSubCategoryAPI(reqData.value)
   goodList.value = res.result.items
 }
 
-onMounted(() => getGoodList(route.params.id as string))
+onMounted(() => getGoodList())
+
+// tab切换回调
+const onTabChange = () => {
+  reqData.value!.page = 1
+  getGoodList()
+}
+
+// 加载更多
+const disabled = ref(false)
+const loadMore = async () => {
+  reqData.value!.page++
+  const res = await getSubCategoryAPI(reqData.value)
+  goodList.value = [...goodList.value!, ...res.result.items]
+  // 加载完毕
+  if (res.result.items.length === 0) {
+    disabled.value = true
+  }
+}
 </script>
 
 <template>
@@ -43,7 +60,10 @@ onMounted(() => getGoodList(route.params.id as string))
       </el-breadcrumb>
     </div>
     <div class="sub-container">
-      <el-tabs>
+      <el-tabs
+        v-model="reqData.sortField"
+        @tab-change="onTabChange"
+      >
         <el-tab-pane
           label="最新商品"
           name="publishTime"
@@ -57,13 +77,26 @@ onMounted(() => getGoodList(route.params.id as string))
           name="evaluateNum"
         ></el-tab-pane>
       </el-tabs>
-      <div class="body">
+      <div
+        class="body"
+        v-infinite-scroll="loadMore"
+        :infinite-scroll-disabled="disabled"
+      >
         <!-- 商品列表-->
         <GoodsItem
           v-for="goods in goodList"
           :key="goods.id"
           :goods="goods"
         />
+        <!-- 加载中 -->
+
+        <div
+          v-if="disabled"
+          class="loading-container"
+        >
+          一滴都没有了
+        </div>
+        <div v-else>加载中.....</div>
       </div>
     </div>
   </div>
@@ -83,6 +116,11 @@ onMounted(() => getGoodList(route.params.id as string))
     display: flex;
     flex-wrap: wrap;
     padding: 0 10px;
+    div {
+      width: 100%;
+      font-size: 20px;
+      text-align: center;
+    }
   }
 
   .goods-item {

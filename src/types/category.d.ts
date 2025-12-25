@@ -121,11 +121,16 @@ export type PropertyItem = {
   name: string
 }
 /** 子分类请求参数 */
+export type SortField = 'publishTime' | 'orderNum' | 'evaluateNum'
 export type SubCategoryRequest = {
+  /** 分类 id */
   categoryId: string
+  /** 页码 */
   page: number
+  /** 每页大小 */
   pageSize: number
-  sortField: 'publishTime' | 'orderNum' | 'evaluateNum'
+  /** 排序字段 */
+  sortField: SortField
 }
 /** 子分类响应结果 */
 export type SubCategoryResult = {

@@ -26,7 +26,13 @@ const routes = [
 ]
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  routes
+  routes,
+  // 路由行为配置
+  scrollBehavior() {
+    return {
+      top: 0
+    }
+  }
 })
 
 export default router
