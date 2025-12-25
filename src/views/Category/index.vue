@@ -1,31 +1,10 @@
 <script setup lang="ts">
-import { getCategoryAPI } from '@/apis/category'
-import { getHomeBannerApi } from '@/apis/home'
-import type { Category } from '@/types/category'
-import type { BannerItem } from '@/types/home'
 import GoodsItem from '../Home/components/GoodsItem.vue'
+import { useBanner } from './composables/useBanner'
+import { useCategory } from './composables/useCategory'
 
-const route = useRoute()
-
-const CategoryData = ref<Category>()
-
-const getCategory = async () => {
-  const res = await getCategoryAPI(route.params.id as string)
-  CategoryData.value = res.result
-}
-
-onMounted(() => getCategory())
-
-watch(route, () => getCategory())
-
-const bannerList = ref<BannerItem[]>()
-
-const getBannerList = async () => {
-  const res = await getHomeBannerApi('2')
-  bannerList.value = res.result
-}
-
-onMounted(() => getBannerList())
+const { bannerList } = useBanner()
+const { CategoryData } = useCategory()
 </script>
 
 <template>
@@ -60,7 +39,7 @@ onMounted(() => getBannerList())
             v-for="i in CategoryData?.children"
             :key="i.id"
           >
-            <RouterLink to="/">
+            <RouterLink :to="`/category/sub/${i.id}`">
               <img :src="i.picture" />
               <p>{{ i.name }}</p>
             </RouterLink>

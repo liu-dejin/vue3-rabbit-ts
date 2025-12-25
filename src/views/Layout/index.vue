@@ -12,6 +12,8 @@ onMounted(() => categoryStore.getCategoryList())
 <template>
   <LayoutNav />
   <LayoutHeader />
+  <!-- 解决路由缓存问题 方法1 破坏复用性,强制销毁重建 性能开销大 -->
+  <!-- <RouterView :key="$route.fullPath" /> -->
   <RouterView />
   <LayoutFooter />
   <LayoutFixed />
