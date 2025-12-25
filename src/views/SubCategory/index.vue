@@ -1,4 +1,18 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { getCategoryFilterAPI } from '@/apis/category'
+import type { CategoryFilterResult } from '@/types/category'
+
+const CategoryData = ref<CategoryFilterResult>()
+
+const route = useRoute()
+
+const getCategoryData = async (id: string) => {
+  const res = await getCategoryFilterAPI(id)
+  CategoryData.value = res.result
+}
+
+onMounted(() => getCategoryData(route.params.id as string))
+</script>
 
 <template>
   <div class="container">
@@ -6,8 +20,10 @@
     <div class="bread-container">
       <el-breadcrumb separator=">">
         <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-        <el-breadcrumb-item :to="{ path: '/' }">居家 </el-breadcrumb-item>
-        <el-breadcrumb-item>居家生活用品</el-breadcrumb-item>
+        <el-breadcrumb-item :to="{ path: `/category/${CategoryData?.parentId}` }"
+          >{{ CategoryData?.parentName }}
+        </el-breadcrumb-item>
+        <el-breadcrumb-item>{{ CategoryData?.name }}</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
     <div class="sub-container">

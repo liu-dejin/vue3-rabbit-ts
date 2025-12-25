@@ -49,3 +49,74 @@ export type Category = {
   /** 下属二级分类数组 */
   children: Child[]
 }
+/** 分类筛选结果 */
+type CategoryFilterResult = {
+  /** 分类 id */
+  id: string
+  /** 分类名称 */
+  name: string
+  /** 分类图片（可能为空） */
+  picture: string | null
+  /** 父级分类 id */
+  parentId: string
+  /** 父级分类名称 */
+  parentName: string
+  /** 商品列表 */
+  goods: Good[]
+  /** 子分类列表 */
+  categories: CategoryItem[]
+  /** 品牌列表 */
+  brands: BrandItem[]
+  /** 销售属性列表 */
+  saleProperties: SalePropertyItem[]
+}
+
+/** 子分类项 */
+type CategoryItem = {
+  /** 分类 id */
+  id: string
+  /** 分类名称 */
+  name: string
+  /** 层级深度 */
+  layer: number
+  /** 父节点（此处固定为 null） */
+  parent: null
+}
+
+/** 品牌项 */
+type BrandItem = {
+  /** 品牌 id */
+  id: string
+  /** 品牌中文名 */
+  name: string
+  /** 品牌英文名 */
+  nameEn: string
+  /** 品牌 logo */
+  logo: string
+  /** 品牌图片 */
+  picture: string
+  /** 类型（此处固定为 null） */
+  type: null
+  /** 品牌描述 */
+  desc: string
+  /** 品牌产地 */
+  place: string
+}
+
+/** 销售属性项 */
+type SalePropertyItem = {
+  /** 属性组 id */
+  id: string
+  /** 属性组名称 */
+  name: string
+  /** 属性列表 */
+  properties: PropertyItem[]
+}
+
+/** 属性项 */
+type PropertyItem = {
+  /** 属性 id */
+  id: string
+  /** 属性名称 */
+  name: string
+}
