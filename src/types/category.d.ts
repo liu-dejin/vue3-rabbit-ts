@@ -50,7 +50,7 @@ export type Category = {
   children: Child[]
 }
 /** 分类筛选结果 */
-type CategoryFilterResult = {
+export type CategoryFilterResult = {
   /** 分类 id */
   id: string
   /** 分类名称 */
@@ -72,7 +72,7 @@ type CategoryFilterResult = {
 }
 
 /** 子分类项 */
-type CategoryItem = {
+export type CategoryItem = {
   /** 分类 id */
   id: string
   /** 分类名称 */
@@ -84,7 +84,7 @@ type CategoryItem = {
 }
 
 /** 品牌项 */
-type BrandItem = {
+export type BrandItem = {
   /** 品牌 id */
   id: string
   /** 品牌中文名 */
@@ -104,7 +104,7 @@ type BrandItem = {
 }
 
 /** 销售属性项 */
-type SalePropertyItem = {
+export type SalePropertyItem = {
   /** 属性组 id */
   id: string
   /** 属性组名称 */
@@ -114,9 +114,29 @@ type SalePropertyItem = {
 }
 
 /** 属性项 */
-type PropertyItem = {
+export type PropertyItem = {
   /** 属性 id */
   id: string
   /** 属性名称 */
   name: string
+}
+/** 子分类请求参数 */
+export type SubCategoryRequest = {
+  categoryId: string
+  page: number
+  pageSize: number
+  sortField: 'publishTime' | 'orderNum' | 'evaluateNum'
+}
+/** 子分类响应结果 */
+export type SubCategoryResult = {
+  /** 总数 */
+  counts: number
+  /** 每页大小 */
+  pageSize: number
+  /** 总页数 */
+  pages: number
+  /** 当前页码 */
+  page: number
+  /** 商品列表 */
+  items: Good[]
 }

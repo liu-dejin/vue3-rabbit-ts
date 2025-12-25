@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { getCategoryFilterAPI } from '@/apis/category'
-import type { CategoryFilterResult } from '@/types/category'
+import { getCategoryFilterAPI, getSubCategoryAPI } from '@/apis/category'
+import type { CategoryFilterResult, Good, SubCategoryRequest } from '@/types/category'
+import GoodsItem from '../Home/components/GoodsItem.vue'
 
 const CategoryData = ref<CategoryFilterResult>()
 
@@ -12,6 +13,21 @@ const getCategoryData = async (id: string) => {
 }
 
 onMounted(() => getCategoryData(route.params.id as string))
+
+const goodList = ref<Good[]>()
+const reqData = ref<SubCategoryRequest>()
+const getGoodList = async (id: string) => {
+  reqData.value = {
+    categoryId: id,
+    page: 1,
+    pageSize: 10,
+    sortField: 'publishTime'
+  }
+  const res = await getSubCategoryAPI(reqData.value)
+  goodList.value = res.result.items
+}
+
+onMounted(() => getGoodList(route.params.id as string))
 </script>
 
 <template>
@@ -43,6 +59,11 @@ onMounted(() => getCategoryData(route.params.id as string))
       </el-tabs>
       <div class="body">
         <!-- 商品列表-->
+        <GoodsItem
+          v-for="goods in goodList"
+          :key="goods.id"
+          :goods="goods"
+        />
       </div>
     </div>
   </div>

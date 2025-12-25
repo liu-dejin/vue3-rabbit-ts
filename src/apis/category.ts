@@ -1,4 +1,9 @@
-import type { Category, CategoryFilterResult } from '@/types/category'
+import type {
+  Category,
+  CategoryFilterResult,
+  SubCategoryRequest,
+  SubCategoryResult
+} from '@/types/category'
 import { request } from '@/utils/request'
 
 /**
@@ -14,3 +19,17 @@ export const getCategoryAPI = (id: string) => request<Category>('/category', 'GE
  */
 export const getCategoryFilterAPI = (id: string) =>
   request<CategoryFilterResult>('/category/sub/filter', 'GET', { id })
+/**
+ * @description: 获取导航数据
+ * @data { 
+     categoryId: 1005000 ,
+     page: 1,
+     pageSize: 20,
+     sortField: 'publishTime' | 'orderNum' | 'evaluateNum'
+   } 
+ * @return {*}
+ */
+
+export const getSubCategoryAPI = (data: SubCategoryRequest) => {
+  return request<SubCategoryResult>('/category/goods/temporary', 'POST', data)
+}
