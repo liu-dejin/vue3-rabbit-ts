@@ -1,4 +1,4 @@
-import { getCategoryApi } from '@/apis/Layout'
+import { getCategoryApi } from '@/apis/layout'
 import type { CategoryItem } from '@/types/layout'
 export const useCategoryStore = defineStore('category', () => {
   // 全部分类
