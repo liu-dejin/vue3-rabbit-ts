@@ -3,12 +3,21 @@
 import { fetchHotGoodsAPI } from '@/apis/detail'
 import type { ProductItem } from '@/types/detail'
 
+const props = defineProps<{
+  hotType: 1 | 2
+}>()
+const titleMap = {
+  1: '24小时热榜',
+  2: '周榜'
+}
+const title = computed(() => titleMap[props.hotType])
+
 const hotGoods = ref<ProductItem[]>([])
 const route = useRoute()
 const fetchHotGoods = async () => {
   const res = await fetchHotGoodsAPI({
     id: route.params.id as string,
-    type: 1
+    type: props.hotType
   })
   hotGoods.value = res.result
 }
@@ -17,7 +26,7 @@ onMounted(() => fetchHotGoods())
 
 <template>
   <div class="goods-hot">
-    <h3>周日榜单</h3>
+    <h3>{{ title }}</h3>
     <!-- 商品区块 -->
     <RouterLink
       to="/"

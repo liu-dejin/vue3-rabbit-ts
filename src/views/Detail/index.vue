@@ -33,7 +33,7 @@ onMounted(() => getDetail())
           <div class="goods-info">
             <div class="media">
               <!-- 图片预览区 -->
-
+              <ImageView />
               <!-- 统计数量 -->
               <ul class="goods-sales">
                 <li>
@@ -128,9 +128,9 @@ onMounted(() => getDetail())
             <!-- 24热榜+专题推荐 -->
             <div class="goods-aside">
               <!-- 24热榜 -->
-              <DetailHot />
+              <DetailHot :hot-type="1" />
               <!-- 周榜 -->
-              <DetailHot />
+              <DetailHot :hot-type="2" />
             </div>
           </div>
         </div>
