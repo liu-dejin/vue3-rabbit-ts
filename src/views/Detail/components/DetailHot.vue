@@ -29,10 +29,10 @@ onMounted(() => fetchHotGoods())
     <h3>{{ title }}</h3>
     <!-- 商品区块 -->
     <RouterLink
-      to="/"
-      class="goods-item"
       v-for="item in hotGoods"
       :key="item.id"
+      to="/"
+      class="goods-item"
     >
       <img
         :src="item.picture"

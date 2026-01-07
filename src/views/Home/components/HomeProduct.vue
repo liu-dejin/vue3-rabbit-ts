@@ -17,9 +17,9 @@ onMounted(() => getGoods())
 <template>
   <div class="home-product">
     <HomePanel
-      :title="cate.name"
       v-for="cate in goodsProduct"
       :key="cate.id"
+      :title="cate.name"
     >
       <div class="box">
         <RouterLink

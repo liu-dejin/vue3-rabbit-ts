@@ -47,9 +47,9 @@ const { CategoryData } = useCategory()
         </ul>
       </div>
       <div
-        class="ref-goods"
         v-for="item in CategoryData?.children"
         :key="item.id"
+        class="ref-goods"
       >
         <div class="head">
           <h3>- {{ item.name }}-</h3>
@@ -57,8 +57,8 @@ const { CategoryData } = useCategory()
         <div class="body">
           <GoodsItem
             v-for="good in item.goods"
-            :goods="good"
             :key="good.id"
+            :goods="good"
           />
         </div>
       </div>

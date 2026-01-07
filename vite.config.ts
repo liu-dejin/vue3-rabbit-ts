@@ -15,7 +15,7 @@ export default defineConfig({
     vue(),
     vueDevTools(),
     AutoImport({
-      imports: ['vue', 'vue-router', 'pinia'],
+      imports: ['vue', 'vue-router', 'pinia', '@vueuse/core'],
       resolvers: [ElementPlusResolver()],
       dts: './src/types/auto-imports.d.ts'
     }),

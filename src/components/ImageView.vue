@@ -8,21 +8,47 @@ const imageList = [
   'https://yanxuan-item.nosdn.127.net/f881cfe7de9a576aaeea6ee0d1d24823.jpg'
 ]
 
-// 小图切换大图
 const activeIndex = ref(0)
 
 // 小图切换大图
 const enterHandler = (i: number) => {
   activeIndex.value = i
 }
+const targetRef = useTemplateRef('target')
+const { elementX, elementY } = useMouseInElement(targetRef)
+const left = ref()
+const top = ref()
+watch([elementX, elementY], () => {
+  // 横向
+  if (elementX.value > 100 && elementX.value < 300) {
+    left.value = elementX.value - 100
+  }
+  // 纵向
+  if (elementY.value > 100 && elementY.value < 300) {
+    top.value = elementY.value - 100
+  }
+  // 边界
+  if (elementX.value > 300) {
+    left.value = 200
+  }
+  if (elementX.value < 100) {
+    left.value = 0
+  }
+  if (elementY.value > 300) {
+    top.value = 200
+  }
+  if (elementY.value < 100) {
+    top.value = 0
+  }
+})
 </script>
 
 <template>
   <div class="goods-image">
     <!-- 左侧大图-->
     <div
-      class="middle"
       ref="target"
+      class="middle"
     >
       <img
         :src="imageList[activeIndex]"
@@ -31,7 +57,7 @@ const enterHandler = (i: number) => {
       <!-- 蒙层小滑块 -->
       <div
         class="layer"
-        :style="{ left: `0px`, top: `0px` }"
+        :style="{ left: `${left}px`, top: `${top}px` }"
       ></div>
     </div>
     <!-- 小图列表 -->
@@ -39,8 +65,8 @@ const enterHandler = (i: number) => {
       <li
         v-for="(img, i) in imageList"
         :key="i"
-        @mouseenter="enterHandler(i)"
         :class="{ active: activeIndex === i }"
+        @mouseenter="enterHandler(i)"
       >
         <img
           :src="img"
@@ -50,6 +76,7 @@ const enterHandler = (i: number) => {
     </ul>
     <!-- 放大镜大图 -->
     <div
+      v-show="false"
       class="large"
       :style="[
         {
@@ -58,7 +85,6 @@ const enterHandler = (i: number) => {
           backgroundPositionY: `0px`
         }
       ]"
-      v-show="false"
     ></div>
   </div>
 </template>

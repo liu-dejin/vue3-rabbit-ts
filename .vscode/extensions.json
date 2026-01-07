@@ -1,9 +1,3 @@
 {
-  "recommendations": [
-    "Vue.volar",
-    "dbaeumer.vscode-eslint",
-    "usernamehw.errorlens",
-    "pucelle.vscode-css-navigation",
-    "formulahendry.auto-rename-tag"
-  ]
+  "recommendations": ["Vue.volar", "dbaeumer.vscode-eslint", "usernamehw.errorlens", "pucelle.vscode-css-navigation", "formulahendry.auto-rename-tag"]
 }

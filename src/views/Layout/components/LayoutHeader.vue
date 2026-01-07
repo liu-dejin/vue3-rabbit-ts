@@ -12,9 +12,9 @@ const categoryStore = useCategoryStore()
       </h1>
       <ul class="app-header-nav">
         <li
-          class="home"
           v-for="item in categoryStore.categoryList"
           :key="item.id"
+          class="home"
         >
           <RouterLink
             active-class="active"
