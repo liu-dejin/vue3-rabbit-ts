@@ -34,7 +34,6 @@ export default defineConfigWithVueTs(
       // --- 代码质量 ---
       'vue/no-v-html': 'warn',
       'vue/require-v-for-key': 'error',
-      'vue/multi-word-component-names': ['warn', { ignores: ['index'] }],
 
       // 解决你遇到的报错：允许短路和三元表达式
       '@typescript-eslint/no-unused-expressions': [
@@ -43,6 +42,35 @@ export default defineConfigWithVueTs(
           allowShortCircuit: true,
           allowTernary: true,
           allowTaggedTemplates: true
+        }
+      ],
+      //驼峰命名
+      // 1. 强制组件名为大驼峰
+      'vue/component-name-in-template-casing': ['error', 'PascalCase'],
+
+      // 2. 强制组件定义使用多单词（防止与原生 HTML 冲突）
+      'vue/multi-word-component-names': ['warn', { ignores: ['index'] }],
+
+      // 3. 强制 Props 声明使用小驼峰
+      'vue/prop-name-casing': ['error', 'camelCase'],
+
+      // 4. 强制自定义事件使用小驼峰 (Vue 3 推荐)
+      'vue/custom-event-name-casing': ['error', 'camelCase'],
+
+      // 5. 变量命名规范 (TS/JS)
+      '@typescript-eslint/naming-convention': [
+        'error',
+        {
+          selector: 'variable',
+          format: ['camelCase', 'UPPER_CASE', 'PascalCase'] // 变量支持小驼峰、大写常量、组件名
+        },
+        {
+          selector: 'function',
+          format: ['camelCase', 'PascalCase'] // 函数或组件函数
+        },
+        {
+          selector: 'typeLike',
+          format: ['PascalCase'] // 类型、接口、类用大驼峰
         }
       ],
 
