@@ -2,14 +2,24 @@
 import { getDetailApi } from '@/apis/detail'
 import type { DetailResult } from '@/types/detail'
 import DetailHot from './components/DetailHot.vue'
+import type { Goods } from '@/components/XtxSku/index.vue'
 
 const goods = ref<DetailResult>()
 const route = useRoute()
+const goodsSku = ref<Goods>()
 const getDetail = async () => {
   const res = await getDetailApi(route.params.id as string)
   goods.value = res.result
+  goodsSku.value = res.result as unknown as Goods
 }
 onMounted(() => getDetail())
+
+// 将 goods 断言为 unknown 后再断言为 Goods，避免类型不兼容警告
+
+// Sku规格被操作时
+// const skuChange = sku => {
+//   console.log(sku)
+// }
 </script>
 
 <template>
@@ -85,7 +95,10 @@ onMounted(() => getDetail())
                 </dl>
               </div>
               <!-- sku组件 -->
-
+              <XtxSku
+                v-if="goodsSku"
+                :goods="goodsSku"
+              />
               <!-- 数据组件 -->
 
               <!-- 按钮组件 -->

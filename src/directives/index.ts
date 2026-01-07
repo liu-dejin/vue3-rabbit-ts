@@ -7,7 +7,7 @@ export const lazyLoad = {
       mounted(el: HTMLImageElement, binding: DirectiveBinding<string>) {
         const { stop } = useIntersectionObserver(el, ([entry]) => {
           if (entry?.isIntersecting) {
-            console.log('图片进入视口，开始加载:', binding.value)
+            // console.log('图片进入视口，开始加载:', binding.value)
             el.src = binding.value
             stop()
           }

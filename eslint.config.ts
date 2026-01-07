@@ -90,7 +90,8 @@ export default defineConfigWithVueTs(
           math: 'always'
         }
       ],
-
+      // SFC顺序
+      'vue/block-order': ['error', { order: ['script', 'template', 'style'] }],
       // 属性排序
       'vue/attributes-order': [
         'warn',
