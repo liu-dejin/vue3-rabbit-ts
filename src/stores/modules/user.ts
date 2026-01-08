@@ -10,9 +10,14 @@ export const useUserStore = defineStore(
       const res = await loginApi({ account, password })
       userInfo.value = res.result
     }
+    // 退出登录
+    const clearUserInfo = () => {
+      userInfo.value = undefined
+    }
     return {
       userInfo,
-      getUserInfo
+      getUserInfo,
+      clearUserInfo
     }
   },
   {

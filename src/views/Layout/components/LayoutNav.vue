@@ -2,6 +2,12 @@
 import { useUserStore } from '@/stores'
 
 const userStore = useUserStore()
+const router = useRouter()
+// 退出登录
+const handleLogout = () => {
+  userStore.clearUserInfo()
+  router.push('/login')
+}
 </script>
 
 <template>
@@ -19,6 +25,7 @@ const userStore = useUserStore()
               title="确认退出吗?"
               confirm-button-text="确认"
               cancel-button-text="取消"
+              @confirm="handleLogout"
             >
               <template #reference>
                 <a href="javascript:;">退出登录</a>
