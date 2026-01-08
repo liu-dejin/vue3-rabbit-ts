@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useCategoryStore } from '@/stores/modules/category'
+import { useCategoryStore } from '@/stores'
 
 const { y } = useScroll(window)
 const categoryStore = useCategoryStore()

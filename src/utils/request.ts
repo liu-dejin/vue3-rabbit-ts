@@ -21,6 +21,11 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
   res => res.data,
   e => {
+    // 统一错误提示
+    ElMessage({
+      type: 'error',
+      message: e.response?.data?.msg ?? '请求失败'
+    })
     return Promise.reject(e)
   }
 )
