@@ -1,5 +1,5 @@
 import { useUserStore } from '@/stores'
-// import router from '@/router'
+
 import axios, { type Method } from 'axios'
 
 // 1. axios实例，基础配置
@@ -30,6 +30,12 @@ instance.interceptors.response.use(
       type: 'error',
       message: e.response?.data?.msg ?? '请求失败'
     })
+    const userStore = useUserStore()
+    const router = useRouter()
+    if (e.response?.status === 401) {
+      userStore.clearUserInfo()
+      router.push('/login')
+    }
     return Promise.reject(e)
   }
 )
