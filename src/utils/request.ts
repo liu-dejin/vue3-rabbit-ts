@@ -1,4 +1,4 @@
-// import { useUserStore } from '@/stores'
+import { useUserStore } from '@/stores'
 // import router from '@/router'
 import axios, { type Method } from 'axios'
 
@@ -12,6 +12,10 @@ const instance = axios.create({
 // axios请求拦截器
 instance.interceptors.request.use(
   config => {
+    const userStore = useUserStore()
+    if (userStore.userInfo?.token) {
+      config.headers.Authorization = `Bearer ${userStore.userInfo?.token}`
+    }
     return config
   },
   e => Promise.reject(e)
