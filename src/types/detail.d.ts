@@ -45,7 +45,7 @@ export type DetailResult = {
   /** 商品sku集合 */
   skus: Skus[]
   /** 商品可选规格集合备注：规格集合一定要和skus集合下的specs 顺序保持一致 */
-  specs: ResultSpec[]
+  specs: Spec[]
   /** 商品spu编码 */
   spuCode: string
   /** 商品用户地址列表，用户未登录时该字段为空 */
@@ -193,22 +193,20 @@ export type SkusSpec = {
   valueName: string
 }
 
-export type ResultSpec = {
+export type Spec = {
   /** 规格id */
   id: string
   /** 规格名字 */
   name: string
   /** 规格可选值集合 */
-  values: Value[]
+  values: SpecValue[]
 }
 
-export type Value = {
-  /** 可选值备注 */
-  desc: string
-  /** 可选值名称 */
+export type SpecValue = {
   name: string
-  /** 可选值图片地址 */
-  picture: null | string
+  picture?: string
+  selected?: boolean
+  disabled?: boolean
 }
 
 export type ProductItem = {

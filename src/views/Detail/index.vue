@@ -2,7 +2,8 @@
 import { getDetailApi } from '@/apis/detail'
 import type { DetailResult } from '@/types/detail'
 import DetailHot from './components/DetailHot.vue'
-import type { Goods } from '@/components/XtxSku/index.vue'
+import type { Goods, SkuEmitPayload } from '@/components/XtxSku/index.vue'
+import { useCartStore } from '@/stores/modules/cart'
 
 const goods = ref<DetailResult>()
 const route = useRoute()
@@ -10,16 +11,40 @@ const goodsSku = ref<Goods>()
 const getDetail = async () => {
   const res = await getDetailApi(route.params.id as string)
   goods.value = res.result
-  goodsSku.value = res.result as unknown as Goods
+  const { specs, skus } = res.result
+  goodsSku.value = { specs, skus }
 }
 onMounted(() => getDetail())
 
 // 将 goods 断言为 unknown 后再断言为 Goods，避免类型不兼容警告
 
 // Sku规格被操作时
-// const skuChange = sku => {
-//   console.log(sku)
-// }
+let skuObj = {} as SkuEmitPayload
+const skuChange = (sku: SkuEmitPayload) => {
+  console.log(sku)
+  skuObj = sku
+}
+
+// 数量改变时
+const count = ref(1)
+const countChange = (count: number) => {
+  console.log(count)
+}
+// 添加购物车
+const cartStore = useCartStore()
+const addCart = () => {
+  if (!skuObj.skuId) ElMessage.error('请选择商品规格')
+  cartStore.addCart({
+    id: goods.value!.id ?? '',
+    name: goods.value!.name ?? '',
+    picture: goods.value!.mainPictures?.[0] ?? '',
+    price: goods.value!.price ?? '',
+    count: count.value! ?? 0,
+    skuId: skuObj.skuId ?? '',
+    attrsText: skuObj.specsText ?? '',
+    selected: true
+  })
+}
 </script>
 
 <template>
@@ -98,14 +123,22 @@ onMounted(() => getDetail())
               <XtxSku
                 v-if="goodsSku"
                 :goods="goodsSku"
+                @change="skuChange"
               />
               <!-- 数据组件 -->
-
+              <el-input-number
+                v-model="count"
+                :min="1"
+                :max="10"
+                :step="1"
+                @change="countChange"
+              />
               <!-- 按钮组件 -->
               <div>
                 <el-button
                   size="large"
                   class="btn"
+                  @click="addCart"
                 >
                   加入购物车
                 </el-button>

@@ -1,0 +1,34 @@
+export type CartItem = {
+  // 商品属性
+  attrsText: string
+  // 商品数量，购买的数量
+  count: number
+  // 商品折扣
+  discount?: null
+  // 商品id
+  id: string
+  // 商品是否收藏
+  isCollect?: boolean
+  // 商品是否有效
+  isEffective?: boolean
+  // 商品名字
+  name: string
+  // 商品现在的原始价格
+  nowOriginalPrice?: string
+  // 商品现在价格，可能在购物车里商家改价
+  nowPrice?: string
+  // 商品图片
+  picture: string
+  // 商品邮费
+  postFee?: number
+  // 商品价格
+  price: string
+  // 商品选中状态
+  selected: boolean
+  // 商品sku的Id
+  skuId: string
+  // 商品规格列表
+  specs?: string[]
+  // 商品库存
+  stock?: number
+}
