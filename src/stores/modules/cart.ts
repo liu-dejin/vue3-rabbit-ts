@@ -63,8 +63,12 @@ export const useCartStore = defineStore(
     const checkedPrice = computed(() =>
       cartList.value.filter(item => item.selected).reduce((a, c) => a + c.count * c.price, 0)
     )
-
+    // 清空购物车
+    const clearCart = () => {
+      cartList.value = []
+    }
     return {
+      isLogin,
       cartList,
       addCart,
       delCart,
@@ -75,7 +79,9 @@ export const useCartStore = defineStore(
       isIndeterminate,
       allCheck,
       checkedCount,
-      checkedPrice
+      checkedPrice,
+      getCartList,
+      clearCart
     }
   },
   {

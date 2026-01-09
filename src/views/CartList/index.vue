@@ -1,14 +1,20 @@
 <script setup lang="ts">
+import { updateCartSelectApi } from '@/apis/cart'
 import { useCartStore } from '@/stores/modules/cart'
 import type { CartItem } from '@/types/cart'
 import type { CheckboxValueType } from 'element-plus'
 
 const CartStore = useCartStore()
-
+// 商品选中状态改变
 const singleChange = (i: CartItem, selected: CheckboxValueType) => {
   CartStore.singleCheck(i.skuId, !!selected)
 }
-const allCheck = (selected: CheckboxValueType) => {
+
+// 全选/取消全选
+const allCheck = async (selected: CheckboxValueType) => {
+  if (CartStore.isLogin) {
+    await updateCartSelectApi({ selected: !!selected, ids: CartStore.cartList.map(i => i.skuId) })
+  }
   CartStore.allCheck(!!selected)
 }
 </script>

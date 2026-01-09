@@ -49,6 +49,7 @@ const handleLogin = async () => {
     skuId: item.skuId
   }))
   await mergeCartApi(mergeCartData)
+  await CartStore.getCartList()
 }
 </script>
 

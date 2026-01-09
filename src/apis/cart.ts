@@ -38,3 +38,10 @@ export const mergeCartApi = (data: MergeCartData[]) => request('/member/cart/mer
  * @returns
  */
 export const deleteCartApi = (ids: string[]) => request('/member/cart', 'DELETE', { ids })
+/**
+ * 修改-购物车全选/取消
+ * @param data
+ * @returns
+ */
+export const updateCartSelectApi = (data: { selected: boolean; ids: string[] }) =>
+  request('/member/cart/selected', 'PUT', data)
