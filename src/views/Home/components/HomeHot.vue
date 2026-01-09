@@ -2,7 +2,7 @@
 import HomePanel from './HomePanel.vue'
 import { getHotAPI } from '@/apis/home'
 import type { HotItem } from '@/types/home'
-import { ref } from 'vue'
+
 
 const hotList = ref<HotItem[]>()
 

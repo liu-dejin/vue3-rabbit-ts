@@ -6,7 +6,7 @@ import axios, { type Method } from 'axios'
 const baseURL = 'http://pcapi-xiaotuxian-front-devtest.itheima.net/'
 const instance = axios.create({
   baseURL,
-  timeout: 10000 // 请求超过10秒就报错
+  timeout: 100000 // 请求超过10秒就报错
 })
 
 // axios请求拦截器
