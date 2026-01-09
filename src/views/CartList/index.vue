@@ -1,11 +1,15 @@
 <script setup lang="ts">
 import { useCartStore } from '@/stores/modules/cart'
 import type { CartItem } from '@/types/cart'
+import type { CheckboxValueType } from 'element-plus'
 
 const CartStore = useCartStore()
 
-const singleChange = (i: CartItem, selected: boolean) => {
-  CartStore.singleCheck(i.skuId, selected)
+const singleChange = (i: CartItem, selected: CheckboxValueType) => {
+  CartStore.singleCheck(i.skuId, !!selected)
+}
+const allCheck = (selected: CheckboxValueType) => {
+  CartStore.allCheck(!!selected)
 }
 </script>
 
@@ -17,7 +21,11 @@ const singleChange = (i: CartItem, selected: boolean) => {
           <thead>
             <tr>
               <th width="120">
-                <el-checkbox />
+                <el-checkbox
+                  :model-value="CartStore.isAll"
+                  :indeterminate="CartStore.isIndeterminate"
+                  @change="allCheck"
+                />
               </th>
               <th width="400">商品信息</th>
               <th width="220">单价</th>

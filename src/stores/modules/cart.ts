@@ -30,13 +30,27 @@ export const useCartStore = defineStore(
         item.selected = selected
       }
     }
+    // 全选功能
+    const isAll = computed(() => cartList.value.every(item => item.selected))
+    const allCheck = (selected: boolean) => {
+      cartList.value.forEach(item => (item.selected = selected))
+    }
+    // 中间状态
+    const isIndeterminate = computed(() => {
+      const checkedCount = cartList.value.filter(item => item.selected).length
+      return checkedCount > 0 && checkedCount < cartList.value.length
+    })
+
     return {
       cartList,
       addCart,
       delCart,
       allCount,
       allPrice,
-      singleCheck
+      singleCheck,
+      isAll,
+      isIndeterminate,
+      allCheck
     }
   },
   {
