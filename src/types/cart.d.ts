@@ -22,7 +22,7 @@ export type CartItem = {
   // 商品邮费
   postFee?: number
   // 商品价格
-  price: string
+  price: number
   // 商品选中状态
   selected: boolean
   // 商品sku的Id
