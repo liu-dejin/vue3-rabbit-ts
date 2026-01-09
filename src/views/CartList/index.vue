@@ -99,8 +99,8 @@ const allCheck = (selected: CheckboxValueType) => {
       <!-- 操作栏 -->
       <div class="action">
         <div class="batch">
-          共 10 件商品，已选择 2 件，商品合计：
-          <span class="red">¥ 200.00 </span>
+          共 {{ CartStore.allCount }} 件商品，已选择 {{ CartStore.checkedCount }} 件，商品合计：
+          <span class="red">¥ {{ CartStore.checkedPrice.toFixed(2) }} </span>
         </div>
         <div class="total">
           <el-button

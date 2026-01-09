@@ -1,5 +1,7 @@
 <script setup lang="ts">
+import { mergeCartApi } from '@/apis/cart'
 import { useUserStore } from '@/stores'
+import { useCartStore } from '@/stores/modules/cart'
 import { ElMessage, type FormInstance, type FormRules } from 'element-plus'
 
 const userStore = useUserStore()
@@ -39,6 +41,14 @@ const handleLogin = async () => {
     message: '登录成功'
   })
   router.replace({ path: '/' })
+  // 合并购物车
+  const CartStore = useCartStore()
+  const mergeCartData = CartStore.cartList.map(item => ({
+    count: item.count,
+    selected: item.selected,
+    skuId: item.skuId
+  }))
+  await mergeCartApi(mergeCartData)
 }
 </script>
 

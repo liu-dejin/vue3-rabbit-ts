@@ -35,7 +35,7 @@ export type DetailResult = {
   /** 商品原价 */
   oldPrice: string
   /** 商品价格 */
-  price: string
+  price: number
   /** 商品推荐集合，仅APP有此数据 */
   recommends: null
   /** 商品销量 */

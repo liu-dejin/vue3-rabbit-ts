@@ -27,9 +27,9 @@ const skuChange = (sku: SkuEmitPayload) => {
 
 // 数量改变时
 const count = ref(1)
-const countChange = (count: number) => {
-  console.log(count)
-}
+// const countChange = (count: number) => {
+//   console.log(count)
+// }
 // 添加购物车
 const cartStore = useCartStore()
 const addCart = () => {
@@ -38,7 +38,7 @@ const addCart = () => {
     id: goods.value!.id ?? '',
     name: goods.value!.name ?? '',
     picture: goods.value!.mainPictures?.[0] ?? '',
-    price: goods.value!.price ?? '',
+    price: goods.value!.price ?? 0,
     count: count.value! ?? 0,
     skuId: skuObj.skuId ?? '',
     attrsText: skuObj.specsText ?? '',
@@ -131,7 +131,6 @@ const addCart = () => {
                 :min="1"
                 :max="10"
                 :step="1"
-                @change="countChange"
               />
               <!-- 按钮组件 -->
               <div>
