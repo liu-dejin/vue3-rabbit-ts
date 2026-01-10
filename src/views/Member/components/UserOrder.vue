@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { getOrderListAPI, type OrderListParams } from '@/apis/member'
+import type { OrderItem } from '@/types/order'
+
 // tab列表
 const tabTypes = [
   { name: 'all', label: '全部订单' },
@@ -10,7 +13,13 @@ const tabTypes = [
   { name: 'cancel', label: '已取消' }
 ]
 // 订单列表
-const orderList = []
+const orderList = ref<OrderItem[]>([])
+const params = ref<OrderListParams>()
+const getOrderList = async () => {
+  const res = await getOrderListAPI(params.value as OrderListParams)
+  orderList.value = res.result.items
+}
+onMounted(() => getOrderList())
 </script>
 
 <template>
