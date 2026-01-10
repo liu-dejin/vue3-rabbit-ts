@@ -1,3 +1,5 @@
+import type { Good } from './common'
+
 export type CategoryItem = {
   /** 子分类数组 */
   children: ChildItem[]
@@ -24,19 +26,4 @@ export type ChildItem = {
   picture: string
 }
 
-export type GoodItem = {
-  /** 商品描述 */
-  desc: string
-  /** 商品折扣，如为null时，即无折扣 */
-  discount?: string
-  /** 商品id */
-  id: string
-  /** 商品名字 */
-  name: string
-  /** 商品销量 */
-  orderNum?: string
-  /** 商品图片 */
-  picture: string
-  /** 商品价格 */
-  price: string
-}
+export type GoodItem = Good

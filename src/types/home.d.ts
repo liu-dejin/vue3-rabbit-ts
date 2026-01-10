@@ -1,3 +1,5 @@
+import type { Good } from './common'
+
 export type BannerItem = {
   /** 轮播图跳转链接 */
   hrefUrl: string
@@ -63,17 +65,7 @@ export type CategoryChild = {
 }
 
 /** 核心商品模型 */
-export type GoodsItem = {
-  /** 商品唯一ID */
-  id: string
-  /** 商品名称 */
-  name: string
-  /** 商品详细描述 */
-  desc: string
-  /** 商品价格（字符串格式） */
-  price: string
-  /** 商品图片URL */
-  picture: string
-  /** 销量/已订购数量 */
-  orderNum: number
+export type GoodsItem = Good & {
+  /** 商品折扣，如为null时，即无折扣 */
+  discount?: string
 }
