@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { getOrderListAPI, type OrderListParams } from '@/apis/member'
 import type { OrderItem } from '@/types/order'
+import type { TabPaneName } from 'element-plus'
 
 // tab列表
 const tabTypes = [
@@ -14,17 +15,34 @@ const tabTypes = [
 ]
 // 订单列表
 const orderList = ref<OrderItem[]>([])
-const params = ref<OrderListParams>()
+const total = ref<number>(0)
+const params = ref<OrderListParams>({
+  orderState: 0,
+  page: 1,
+  pageSize: 10
+})
 const getOrderList = async () => {
   const res = await getOrderListAPI(params.value as OrderListParams)
   orderList.value = res.result.items
+  total.value = res.result.counts
 }
 onMounted(() => getOrderList())
+
+// tab切换
+const tabChange = (type: TabPaneName) => {
+  params.value.orderState = Number(type)
+  getOrderList()
+}
+// 分页切换
+const pageChange = (page: number) => {
+  params.value.page = page
+  getOrderList()
+}
 </script>
 
 <template>
   <div class="order-container">
-    <el-tabs>
+    <el-tabs @tab-change="tabChange">
       <!-- tab切换 -->
       <el-tab-pane
         v-for="item in tabTypes"
@@ -147,6 +165,9 @@ onMounted(() => getOrderList())
             <el-pagination
               background
               layout="prev, pager, next"
+              :page-size="params.pageSize"
+              :total
+              @current-change="pageChange"
             />
           </div>
         </div>
