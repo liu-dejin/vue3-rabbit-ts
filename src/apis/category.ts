@@ -29,7 +29,6 @@ export const getCategoryFilterAPI = (id: string) =>
    } 
  * @return {*}
  */
-
 export const getSubCategoryAPI = (data: SubCategoryRequest) => {
   return request<SubCategoryResult>('/category/goods/temporary', 'POST', data)
 }

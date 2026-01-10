@@ -9,7 +9,6 @@ import { request } from '@/utils/request'
 export const getDetailApi = (id: string) => {
   return request<DetailResult>('/goods', 'GET', { id })
 }
-
 /**
  * 获取商品热榜
  * @param id 商品id

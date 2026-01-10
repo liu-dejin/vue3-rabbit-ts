@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { getOrderListAPI, type OrderListParams } from '@/apis/member'
+import { OrderState } from '@/enum/OrderState'
 import type { OrderItem } from '@/types/order'
 import type { TabPaneName } from 'element-plus'
 
@@ -106,7 +107,7 @@ const pageChange = (page: number) => {
                 </ul>
               </div>
               <div class="column state">
-                <p>{{ order.orderState }}</p>
+                <p>{{ OrderState[order.orderState] }}</p>
                 <p v-if="order.orderState === 3">
                   <a
                     href="javascript:;"

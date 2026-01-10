@@ -8,7 +8,6 @@ import { request } from '@/utils/request'
  */
 export const getHomeBannerApi = (distributionSite: string = '1') =>
   request<BannerItem[]>('/home/banner', 'GET', { distributionSite })
-
 /**
  * 获取新鲜好物
  * @param limit - 需要的数据条数（后台设置默认4）
