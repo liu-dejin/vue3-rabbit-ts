@@ -1,5 +1,15 @@
 <script setup lang="ts">
-const payInfo = {}
+import { getPayInfoApi } from '@/apis/pay'
+import type { PayResult } from '@/types/pay'
+
+// 获取订单数据
+const route = useRoute()
+const payInfo = ref<PayResult>()
+const getPayInfo = async (id: string) => {
+  const res = await getPayInfoApi(id)
+  payInfo.value = res.result
+}
+onMounted(() => getPayInfo(route.query.id as string))
 </script>
 
 <template>
@@ -14,7 +24,7 @@ const payInfo = {}
         </div>
         <div class="amount">
           <span>应付总额：</span>
-          <span>¥{{ payInfo.payMoney?.toFixed(2) }}</span>
+          <span>¥{{ payInfo?.payMoney.toFixed(2) }}</span>
         </div>
       </div>
       <!-- 付款方式 -->
