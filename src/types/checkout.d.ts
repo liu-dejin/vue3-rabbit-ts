@@ -48,7 +48,7 @@ export type UserAddress = {
   /**收货详细地址 */
   address: string
   /**收货地址标签，用英文逗号分割 */
-  addressTags: null | string
+  addressTags: string
   /**收货地址-城市编码 */
   cityCode: string
   /**收货人-联系方式 */
@@ -62,9 +62,61 @@ export type UserAddress = {
   /**是否为默认，0是, 1不是 */
   isDefault: number
   /**收货方-邮政编码 */
-  postalCode: null | string
+  postalCode: string
   /**收货地址-省份编码 */
   provinceCode: string
   /**收货人-名字 */
   receiver: string
+}
+
+export type Address = Omit<UserAddress, 'id'>
+
+export type CheckoutSubmit = {
+  /**收货地址id */
+  addressId: string
+  /**买家备注留言，默认为空字符串即可 */
+  buyerMessage: string
+  /**配送时间，默认为1即可 */
+  deliveryTimeType: number
+  /**订单内商品集合，需要自己携带给后台 */
+  goods: SubmitGood[]
+  /**支付渠道，默认为1即可(支付宝支付-此项目只支持支付宝) */
+  payChannel: number
+  /**支付方式，默认为1即可(在线支付) */
+  payType: number
+}
+
+export type SubmitGood = {
+  /**商品数量 */
+  count: number
+  /**商品库存量单位id */
+  skuId: string
+}
+
+// 订单提交结果
+export type CheckoutSubmitResult = {
+  /**订单倒计时，剩余的秒数 -1 表示已经超时，正数表示倒计时未结束 */
+  countdown: null
+  /**订单创建时间 */
+  createTime: string
+  /**订单id */
+  id: string
+  /**订单状态，1为待付款、2为待发货、3为待收货、4为待评价、5为已完成、6为已取消 */
+  orderState: number
+  /**订单支付渠道，1支付宝、2微信 */
+  payChannel: number
+  /**订单付款截止时间，剩余的秒数，前台转换成分钟：秒数 */
+  payLatestTime: string
+  /**订单实付金额 */
+  payMoney: number
+  /**订单支付方式，1为在线支付，2为货到付款 */
+  payType: number
+  /**订单邮费 */
+  postFee: number
+  /**订单商品sku的id集合 */
+  skus: null
+  /**订单金额合计 */
+  totalMoney: number
+  /**订单数量合计 */
+  totalNum: number
 }
