@@ -17,6 +17,9 @@ importers:
       cn-division:
         specifier: ^2025.0.1
         version: 2025.0.1
+      dayjs:
+        specifier: ^1.11.19
+        version: 1.11.19
       element-plus:
         specifier: ^2.13.0
         version: 2.13.0(vue@3.5.26(typescript@5.9.3))

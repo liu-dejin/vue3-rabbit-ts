@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { getPayInfoApi } from '@/apis/pay'
+
 import type { PayResult } from '@/types/pay'
 
 // 获取订单数据
