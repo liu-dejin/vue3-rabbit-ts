@@ -3,7 +3,6 @@ import HomePanel from './HomePanel.vue'
 import { getHotAPI } from '@/apis/home'
 import type { HotItem } from '@/types/home'
 
-
 const hotList = ref<HotItem[]>()
 
 const getHotList = async () => {

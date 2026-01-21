@@ -8,7 +8,7 @@ const emit = defineEmits(['changeSku'])
 
 // 接受父组件获取的商品数据
 // 1.defineProps  响应式解构后 不用加.value
-const {goods} = defineProps({
+const { goods } = defineProps({
   goods: {
     type: Object,
     default: () => ({})
@@ -143,17 +143,17 @@ const updateDisabledStatus = (specs, pathMap) => {
         >
           <!-- 图片类型规格 -->
           <img
-            @click="changeSku(item, val)"
-            :class="{ selected: val.selected, disabled: val.disabled }"
             v-if="val.picture"
+            :class="{ selected: val.selected, disabled: val.disabled }"
             :src="val.picture"
             :title="val.name"
+            @click="changeSku(item, val)"
           />
           <!-- 文字类型规格 -->
           <span
-            @click="changeSku(item, val)"
-            :class="{ selected: val.selected, disabled: val.disabled }"
             v-else
+            :class="{ selected: val.selected, disabled: val.disabled }"
+            @click="changeSku(item, val)"
             >{{ val.name }}</span
           >
         </template>

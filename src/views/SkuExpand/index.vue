@@ -18,8 +18,8 @@ onMounted(async () => {
 
 <template>
   <Sku
-    @changeSku="changeSku"
     :goods
+    @changeSku="changeSku"
   />
 </template>
 
